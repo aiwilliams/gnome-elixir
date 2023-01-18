@@ -19,7 +19,7 @@ defmodule HangmanTest do
   test "state doesn't change if a game is won or lost" do
     for state <- [:won, :lost] do
       game = Game.new_game("wombat") |> Map.put(:game_state, state)
-      {new_game, tally} = Game.make_move(game, "x")
+      {new_game, _tally} = Game.make_move(game, "x")
       assert new_game == game
     end
   end
@@ -44,19 +44,19 @@ defmodule HangmanTest do
 
   test "we recognize a letter in the word" do
     game = Game.new_game("wombat")
-    {game, tally} = Game.make_move(game, "m")
+    {_game, tally} = Game.make_move(game, "m")
     assert tally.game_state == :good_guess
-    {game, tally} = Game.make_move(game, "t")
+    {_game, tally} = Game.make_move(game, "t")
     assert tally.game_state == :good_guess
   end
 
   test "we recognize a letter not in the word" do
     game = Game.new_game("wombat")
-    {game, tally} = Game.make_move(game, "x")
+    {_game, tally} = Game.make_move(game, "x")
     assert tally.game_state == :bad_guess
-    {game, tally} = Game.make_move(game, "t")
+    {_game, tally} = Game.make_move(game, "t")
     assert tally.game_state == :good_guess
-    {game, tally} = Game.make_move(game, "y")
+    {_game, tally} = Game.make_move(game, "y")
     assert tally.game_state == :bad_guess
   end
 
@@ -92,7 +92,7 @@ defmodule HangmanTest do
       ["d", :bad_guess, 3, ["_", "_", "_", "_", "_"], ["a", "b", "c", "d"]],
       ["f", :bad_guess, 2, ["_", "_", "_", "_", "_"], ["a", "b", "c", "d", "f"]],
       ["g", :bad_guess, 1, ["_", "_", "_", "_", "_"], ["a", "b", "c", "d", "f", "g"]],
-      ["i", :lost, 0, ["_", "_", "_", "_", "_"], ["a", "b", "c", "d", "f", "g", "i"]]
+      ["i", :lost, 0, ["h", "e", "l", "l", "o"], ["a", "b", "c", "d", "f", "g", "i"]]
     ]
     |> test_sequence_of_moves
   end

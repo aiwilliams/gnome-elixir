@@ -60,13 +60,18 @@ defmodule Hangman.Impl.Game do
   defp guess_state(true), do: :won
   defp guess_state(_), do: :good_guess
 
-  defp tally(game) do
+  @spec tally(t) :: Type.tally()
+  def tally(game) do
     %{
       turns_left: game.turns_left,
       game_state: game.game_state,
       letters: reveal_guessed_letters(game),
       used: game.used |> MapSet.to_list() |> Enum.sort()
     }
+  end
+
+  defp reveal_guessed_letters(game = %{game_state: :lost}) do
+    game.letters
   end
 
   defp reveal_guessed_letters(game) do
