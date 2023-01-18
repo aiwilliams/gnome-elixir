@@ -1,8 +1,8 @@
 defmodule DictionaryTest do
   use ExUnit.Case
-  doctest Dictionary
 
-  test "greets the world" do
-    assert Dictionary.hello() == :world
+  test "random_word" do
+    dict = Dictionary.start()
+    assert is_binary(Dictionary.random_word(dict))
   end
 end
