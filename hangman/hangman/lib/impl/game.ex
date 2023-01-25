@@ -15,6 +15,7 @@ defmodule Hangman.Impl.Game do
 
   @spec new_game :: t
   def new_game do
+    IO.puts("Starting new game...")
     new_game(Dictionary.random_word())
   end
 
