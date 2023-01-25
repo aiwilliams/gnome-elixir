@@ -7,7 +7,7 @@ defmodule Hangman do
 
   @spec new_game() :: game
   def new_game do
-    {:ok, game} = GenServer.start_link(Server, [])
+    {:ok, game} = Hangman.Runtime.Application.start_game()
     game
   end
 
